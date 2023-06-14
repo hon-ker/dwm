@@ -6,43 +6,55 @@ static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int vertpad            = 10;       /* vertical padding of bar */
-static const int sidepad            = 10;       /* horizontal padding of bar */
+static const int vertpad            = 4;       /* vertical padding of bar */
+static const int sidepad            = 4;       /* horizontal padding of bar */
 static const char *fonts[]          = {
   "monospace:size=13",
   "WenQuanYi Micro Hei:size=12:type=Regular:antialias=true:autohint=true",
   "symbols Nerd Font:pixelsize=16:type=Regular:antialias=true:autohint=true"
   "JoyPixels:pixelsize=16:type=Regular:antialias=true:autohint=true"
 };
+
 #define ICONSIZE 16   /* icon size */
 #define ICONSPACING 5 /* space between icon and title */
 
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char dmenufont[]       = "monospace:size=6";
+
+// 配色
+// 注意如若要实现类似透明背景效果，务必使状态栏背景 gray 和标签的背景颜色一致
+static const char theme[]           = "#9999ff";    //
+static const char gray[]            = "#24283b";    //背景色
+static const char black[]           = "#222222";
+static const char white[]           = "#ffffff";
+static const char blue[]            = "#7aa2f7";
+static const char green[]           = "#9ece6a";
+static const char red[]             = "#f7768e";
+static const char orange[]          = "#ff9e64";
+static const char yellow[]          = "#e0af68";
+static const char pink[]            = "#bb9af7";
+static const char syan[]            = "#01ffff";
+
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeTitle]  = { col_gray4, col_cyan,  col_cyan  },
+  /*                    fg              bg              border   */
+  [SchemeNorm]      = { white,      gray,        gray },        // 状态栏
+  [SchemeSel]       = { gray,      gray,        theme},             // 窗口
+  [SchemeTitle]     = { theme,     gray,        gray  },        // 窗口标题颜色
 };
 
-/* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+  /* tagging */
+static const char *tags[] = { "","","󰮤","", "", "", "" };
 
 static const char *tagsel[][2] = {
-	{ "#ffffff", "#ff0000" },
-	{ "#ffffff", "#ff7f00" },
-	{ "#000000", "#ffff00" },
-	{ "#000000", "#00ff00" },
-	{ "#ffffff", "#0000ff" },
-	{ "#ffffff", "#4b0082" },
-	{ "#ffffff", "#9400d3" },
-	{ "#000000", "#ffffff" },
-	{ "#ffffff", "#000000" },
+//  icon            bg
+	{ blue      ,   gray  },
+	{ orange       ,gray  },
+	{ red       ,   gray  },
+	{ green     ,   gray  },
+	{ pink      ,   gray  },
+	{ yellow    ,   gray  },
+	{ syan      ,   gray  },
+	//{ "#000000" ,   gray  },
+	//{ "#ffffff" ,   gray  },
 };
 
 static const Rule rules[] = {
@@ -56,16 +68,17 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.65; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
+
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+  /* symbol     arrange function */
+  { "",      tile },    /* first entry is default */
+  { "󱕐",      NULL },    /* no layout function means floating behavior */
+  { "",      monocle },
 };
 
 /* key definitions */
@@ -80,7 +93,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
