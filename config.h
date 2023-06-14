@@ -12,6 +12,9 @@ static const char *fonts[]          = {
   "symbols Nerd Font:pixelsize=16:type=Regular:antialias=true:autohint=true"
   "JoyPixels:pixelsize=16:type=Regular:antialias=true:autohint=true"
 };
+#define ICONSIZE 16   /* icon size */
+#define ICONSPACING 5 /* space between icon and title */
+
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
