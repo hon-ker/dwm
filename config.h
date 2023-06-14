@@ -129,8 +129,8 @@ static const Key keys[] = {
   { MODKEY,                     XK_period,    setmfact,       {.f = +0.05} },
 
   // 全屏切换
-//  { MODKEY,                     XK_f,      togglefullscr,  {0} },
-
+//{ MODKEY,                     XK_f,      togglefullscr,  {0} },
+{ MODKEY,             XK_f,      fullscreen,     {0} },
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
   { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
