@@ -10,6 +10,7 @@ static const int horizpadbar        = 4;        /* horizontal padding for status
 static const int vertpadbar         = 8;        /* vertical padding for statusbar */
 static const int vertpad            = 4;       /* vertical padding of bar */
 static const int sidepad            = 4;       /* horizontal padding of bar */
+
 static const char *fonts[]          = {
   "monospace:size=13",
   "WenQuanYi Micro Hei:size=12:type=Regular:antialias=true:autohint=true",
@@ -21,6 +22,11 @@ static const char *fonts[]          = {
 #define ICONSPACING 9 /* space between icon and title */
 
 static const char dmenufont[]       = "monospace:size=6";
+
+static const char *const autostart[] = {
+	//"alacritty", NULL,
+    NULL /* terminate */
+};
 
 // 配色
 // 注意如若要实现类似透明背景效果，务必使状态栏背景 gray 和标签的背景颜色一致
@@ -84,7 +90,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
   /* symbol     arrange function */
   { "",      tile },    /* first entry is default */
-  { "󱕐",      NULL },    /* no layout function means floating behavior */
+  { "󰍽",      NULL },    /* no layout function means floating behavior */
   { "",      monocle },
 };
 
@@ -121,6 +127,8 @@ static const Key keys[] = {
   // 打开关闭状态栏
   { MODKEY,                     XK_m,       togglebar,      {0} },
 
+  { MODKEY,                     XK_space,      rotatestack,    {.i = -1 } },
+	{ ShiftMask,                  XK_space,      rotatestack,    {.i = +1 } },
   // grid模式和切换
   //{ MODKEY,                     XK_a,       setlayout,      {.v = &layouts[3]} },
   //{ MODKEY|ControlMask,         XK_a,       setlayout,      {.v = &layouts[0]} },
@@ -130,7 +138,7 @@ static const Key keys[] = {
 
   // 全屏切换
 //{ MODKEY,                     XK_f,      togglefullscr,  {0} },
-{ MODKEY,             XK_f,      fullscreen,     {0} },
+  { MODKEY,                       XK_f,      fullscreen,     {0} },
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
   { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -139,7 +147,7 @@ static const Key keys[] = {
   { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
   //{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
   //{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-  { MODKEY,                       XK_space,  setlayout,      {0} },
+  //{ MODKEY,                       XK_space,  setlayout,      {0} },
   { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
   { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
   { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
