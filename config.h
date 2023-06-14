@@ -6,6 +6,8 @@ static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int horizpadbar        = 4;        /* horizontal padding for statusbar */
+static const int vertpadbar         = 8;        /* vertical padding for statusbar */
 static const int vertpad            = 4;       /* vertical padding of bar */
 static const int sidepad            = 4;       /* horizontal padding of bar */
 static const char *fonts[]          = {
@@ -15,8 +17,8 @@ static const char *fonts[]          = {
   "JoyPixels:pixelsize=16:type=Regular:antialias=true:autohint=true"
 };
 
-#define ICONSIZE 16   /* icon size */
-#define ICONSPACING 5 /* space between icon and title */
+#define ICONSIZE 19   /* icon size */
+#define ICONSPACING 9 /* space between icon and title */
 
 static const char dmenufont[]       = "monospace:size=6";
 
