@@ -23,6 +23,7 @@ static const char *fonts[]          = {
 
 //static const char dmenufont[]       = "monospace:size=12";
 
+// 启动时自动加载的脚本，可以自己设置个性化桌面
 static const char *const autostart[] = {
   //"alacritty", NULL,
     NULL /* terminate */
@@ -43,10 +44,10 @@ static const char pink[]            = "#bb9af7";
 static const char syan[]            = "#01ffff";
 
 static const char *colors[][3]      = {
-  /*                    fg              bg              border   */
-  [SchemeNorm]      = { white,      gray,        gray },        // 状态栏
-  [SchemeSel]       = { gray,      gray,        theme},             // 窗口
-  [SchemeTitle]     = { theme,     gray,        gray  },        // 窗口标题颜色
+  /*                    fg          bg      border   */
+  [SchemeNorm]      = { white,      gray,       gray },        // 状态栏
+  [SchemeSel]       = { gray,       gray,       theme},        // 窗口
+  [SchemeTitle]     = { theme,      gray,       gray },        // 窗口标题颜色
 };
 
   /* tagging */
@@ -55,12 +56,12 @@ static const char *tags[] = { "","","", "", "","","󰎈"};
 static const char *tagsel[][2] = {
 //  icon            bg
 	{ blue      ,   gray  },
-	{ pink       ,gray  },
+	{ pink      ,   gray  },
 	{ red       ,   gray  },
 	{ green     ,   gray  },
 	{ yellow    ,   gray  },
 	{ syan      ,   gray  },
-	{ orange     ,   gray  },
+	{ orange    ,   gray  },
 	//{ "#000000" ,   gray  },
 	//{ "#ffffff" ,   gray  },
 };
@@ -120,35 +121,47 @@ static const Key keys[] = {
   { MODKEY,                     XK_c,       spawn,            SHCMD("google-chrome-stable") },
   { MODKEY,                     XK_Return,  spawn,            SHCMD("alacritty")},
   { ControlMask|Mod1Mask,       XK_a,       spawn,            SHCMD("flameshot gui")},
-
+  
+  // kill窗口
   { MODKEY,                     XK_q,       killclient,     {0} },
-  { MODKEY|ShiftMask,           XK_Return,  zoom,           {0} },
 
   // 打开关闭状态栏
   { MODKEY,                     XK_m,       togglebar,      {0} },
 
+  // 选装当前tag的窗口
   { ShiftMask,                  XK_Return,      rotatestack,    {.i = -1 } },
-	{ ShiftMask ,                 XK_space,     rotatestack,    {.i = +1 } },
-
+  { ShiftMask ,                 XK_space,       rotatestack,    {.i = +1 } },
+  
   // grid模式和切换
   //{ MODKEY,                     XK_a,       setlayout,      {.v = &layouts[3]} },
-  //{ MODKEY|ControlMask,         XK_a,       setlayout,      {.v = &layouts[0]} },
-  // 改变mask窗口大小
+
+  // 改变主窗口大小 win + < / >
   { MODKEY,                     XK_comma,     setmfact,       {.f = -0.05} },
   { MODKEY,                     XK_period,    setmfact,       {.f = +0.05} },
 
   // 全屏切换
-//{ MODKEY,                     XK_f,      togglefullscr,  {0} },
   { MODKEY,                       XK_f,      fullscreen,     {0} },
-  { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-  { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-  { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-  { MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
-  { MODKEY,                       XK_Tab,    view,           {0} },
+  
+  //{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+  //{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
+  
+  // 切换
+  { MODKEY,                       XK_Tab,    view,           {0} },         // 切换tag
+  
+  { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },  // 切换窗口
+  { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },  // 切换窗口
+  { MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },  // 切换窗口
+  { MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },  // 切换窗口
+  { MODKEY,                       XK_l,  shiftview,      {.i = +1 } },
+  { MODKEY,                       XK_h,   shiftview,      {.i = -1 } },
+  { MODKEY,                       XK_Right,  shiftview,      {.i = +1 } },
+  { MODKEY,                       XK_Left,   shiftview,      {.i = -1 } },
+
   { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
   //{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
   //{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
   //{ MODKEY,                       XK_space,  setlayout,      {0} },
+  //{ MODKEY|ShiftMask,           XK_Return,  zoom,           {0} },
   { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
   { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
   { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
@@ -159,6 +172,7 @@ static const Key keys[] = {
   { MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
   { MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
   { MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
+  
   TAGKEYS(                        XK_1,                      0)
     TAGKEYS(                        XK_2,                      1)
     TAGKEYS(                        XK_3,                      2)
