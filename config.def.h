@@ -114,7 +114,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *termcmd[]  = { "alacritty", NULL };
-static const char scratchpadname[] = "scratchpad";
+static const char scratchpadname[] = "small cmd";
 static const char *scratchpadcmd[] = { "alacritty", "-T", scratchpadname, "-o","window.dimensions.columns=90","-o","window.dimensions.lines=25", NULL };
 //static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 static const Key keys[] = {
@@ -149,19 +149,40 @@ static const Key keys[] = {
 
   // 全屏切换
   { MODKEY,                       XK_f,      fullscreen,     {0} },
+ 
+  // stack区添加和减少窗口
+  { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+  { MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
   
-  //{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-  //{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
-  
-  // 浮动小窗口
+  // 浮动小窗口 small s
   { MODKEY,                       XK_s,  togglescratch,  {.v = scratchpadcmd } },
+  
   // 切换
   { MODKEY,                       XK_Tab,    view,           {0} },         // 切换tag
-  
+  // 切换tag
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },  // 切换窗口
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },  // 切换窗口
-  { MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },  // 切换窗口
-  { MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },  // 切换窗口
+  
+  // 移动                                                                         //
+	{ MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 1h" } },
+	{ MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
+	{ MODKEY,                       XK_Right,  moveresize,     {.v = "25x 0y 0w 0h" } },
+	{ MODKEY,                       XK_Left,   moveresize,     {.v = "-25x 0y 0w 0h" } },
+  // 大小调整
+	{ MODKEY|ShiftMask,             XK_Down,   moveresize,     {.v = "0x 0y 0w 25h" } },
+	{ MODKEY|ShiftMask,             XK_Up,     moveresize,     {.v = "0x 0y 0w -25h" } },
+	{ MODKEY|ShiftMask,             XK_Right,  moveresize,     {.v = "0x 0y 25w 0h" } },
+	{ MODKEY|ShiftMask,             XK_Left,   moveresize,     {.v = "0x 0y -25w 0h" } },
+  // 位置
+  { MODKEY|ControlMask,           XK_Up,     moveresizeedge, {.v = "t"} },
+	{ MODKEY|ControlMask,           XK_Down,   moveresizeedge, {.v = "b"} },
+	{ MODKEY|ControlMask,           XK_Left,   moveresizeedge, {.v = "l"} },
+	{ MODKEY|ControlMask,           XK_Right,  moveresizeedge, {.v = "r"} },
+	// 放大
+  { MODKEY|ControlMask|ShiftMask, XK_Up,     moveresizeedge, {.v = "T"} },
+	{ MODKEY|ControlMask|ShiftMask, XK_Down,   moveresizeedge, {.v = "B"} },
+	{ MODKEY|ControlMask|ShiftMask, XK_Left,   moveresizeedge, {.v = "L"} },
+	{ MODKEY|ControlMask|ShiftMask, XK_Right,  moveresizeedge, {.v = "R"} },
 
   { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
   //{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
