@@ -13,18 +13,18 @@ static const int sidepad            = 4;       /* horizontal padding of bar */
 
 static const char *fonts[]          = {
   "monospace:size=13",
-  "WenQuanYi Micro Hei:size=12:type=Regular:antialias=true:autohint=true",
-  "symbols Nerd Font:pixelsize=16:type=Regular:antialias=true:autohint=true"
-  "JoyPixels:pixelsize=16:type=Regular:antialias=true:autohint=true"
+  "WenQuanYi Micro Hei:size=13:type=Regular:antialias=true:autohint=true",
+  "symbols Nerd Font:pixelsize=15:type=Regular:antialias=true:autohint=true"
+  "JoyPixels:pixelsize=15:type=Regular:antialias=true:autohint=true"
 };
 
 #define ICONSIZE 19   /* icon size */
 #define ICONSPACING 9 /* space between icon and title */
 
-static const char dmenufont[]       = "monospace:size=6";
+//static const char dmenufont[]       = "monospace:size=12";
 
 static const char *const autostart[] = {
-	//"alacritty", NULL,
+  //"alacritty", NULL,
     NULL /* terminate */
 };
 
@@ -50,17 +50,17 @@ static const char *colors[][3]      = {
 };
 
   /* tagging */
-static const char *tags[] = { "","","󰮤","", "", "", "" };
+static const char *tags[] = { "","","", "", "","","󰎈"};
 
 static const char *tagsel[][2] = {
 //  icon            bg
 	{ blue      ,   gray  },
-	{ orange       ,gray  },
+	{ pink       ,gray  },
 	{ red       ,   gray  },
 	{ green     ,   gray  },
-	{ pink      ,   gray  },
 	{ yellow    ,   gray  },
 	{ syan      ,   gray  },
+	{ orange     ,   gray  },
 	//{ "#000000" ,   gray  },
 	//{ "#ffffff" ,   gray  },
 };
@@ -81,7 +81,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.65; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.60; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -127,8 +127,9 @@ static const Key keys[] = {
   // 打开关闭状态栏
   { MODKEY,                     XK_m,       togglebar,      {0} },
 
-  { MODKEY,                     XK_space,      rotatestack,    {.i = -1 } },
-	{ ShiftMask,                  XK_space,      rotatestack,    {.i = +1 } },
+  { ShiftMask,                  XK_Return,      rotatestack,    {.i = -1 } },
+	{ ShiftMask ,                 XK_space,     rotatestack,    {.i = +1 } },
+
   // grid模式和切换
   //{ MODKEY,                     XK_a,       setlayout,      {.v = &layouts[3]} },
   //{ MODKEY|ControlMask,         XK_a,       setlayout,      {.v = &layouts[0]} },
