@@ -46,7 +46,7 @@ static const char syan[]            = "#01ffff";
 static const char *colors[][3]      = {
   /*                    fg          bg      border   */
   [SchemeNorm]      = { white,      gray,       gray },        // 状态栏
-  [SchemeSel]       = { gray,       gray,       theme},        // 窗口
+  [SchemeSel]       = { red,        gray,       theme},        // 窗口
   [SchemeTitle]     = { theme,      gray,       gray },        // 窗口标题颜色
 };
 
@@ -114,14 +114,16 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *termcmd[]  = { "alacritty", NULL };
-
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "alacritty", "-T", scratchpadname, "-o","window.dimensions.columns=90","-o","window.dimensions.lines=25", NULL };
+//static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 static const Key keys[] = {
   /* modifier                     key        function        argument */
   // 系统级 亮度，音量等
-  {ControlMask,                 XK_F2,      spawn,            SHCMD("~/.dwm/scripts/setVol.sh down")},
-  {ControlMask,                 XK_F3,      spawn,            SHCMD("~/.dwm/scripts/setVol.sh up")},
-  {ControlMask,                 XK_F6,      spawn,            SHCMD("~/.dwm/scripts/setBacklight.sh down")},
-  {ControlMask,                 XK_F7,      spawn,            SHCMD("~/.dwm/scripts/setBacklight.sh up")},
+  {ControlMask,                 XK_F2,      spawn,            SHCMD("~/.dwm/script/setVol.sh down")},
+  {ControlMask,                 XK_F3,      spawn,            SHCMD("~/.dwm/script/setVol.sh up")},
+  {ControlMask,                 XK_F6,      spawn,            SHCMD("~/.dwm/script/setBacklight.sh down")},
+  {ControlMask,                 XK_F7,      spawn,            SHCMD("~/.dwm/script/setBacklight.sh up")},
   // 自定义快捷键
   { MODKEY,                     XK_d,       spawn,            SHCMD("rofi -show drun") },
   { MODKEY,                     XK_c,       spawn,            SHCMD("google-chrome-stable") },
@@ -151,6 +153,8 @@ static const Key keys[] = {
   //{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
   //{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
   
+  // 浮动小窗口
+  { MODKEY,                       XK_s,  togglescratch,  {.v = scratchpadcmd } },
   // 切换
   { MODKEY,                       XK_Tab,    view,           {0} },         // 切换tag
   
