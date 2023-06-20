@@ -128,7 +128,7 @@ static const Key keys[] = {
   { MODKEY,                     XK_d,       spawn,            SHCMD("rofi -show drun") },
   { MODKEY,                     XK_c,       spawn,            SHCMD("google-chrome-stable") },
   { MODKEY,                     XK_Return,  spawn,            SHCMD("alacritty")},
-  { ControlMask|Mod1Mask,       XK_a,       spawn,            SHCMD("flameshot gui")},
+  { Mod1Mask,                   XK_a,       spawn,            SHCMD("flameshot gui")},
   
   // kill窗口
   { MODKEY,                     XK_q,       killclient,     {0} },
@@ -159,24 +159,27 @@ static const Key keys[] = {
   
   // 切换
   { MODKEY,                       XK_Tab,    view,           {0} },         // 切换tag
-  
+  // 切换tag
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },  // 切换窗口
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },  // 切换窗口
   
-  // 移动和调整大小                                                                          //
+  // 移动                                                                         //
 	{ MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 1h" } },
 	{ MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
 	{ MODKEY,                       XK_Right,  moveresize,     {.v = "25x 0y 0w 0h" } },
 	{ MODKEY,                       XK_Left,   moveresize,     {.v = "-25x 0y 0w 0h" } },
+  // 大小调整
 	{ MODKEY|ShiftMask,             XK_Down,   moveresize,     {.v = "0x 0y 0w 25h" } },
 	{ MODKEY|ShiftMask,             XK_Up,     moveresize,     {.v = "0x 0y 0w -25h" } },
 	{ MODKEY|ShiftMask,             XK_Right,  moveresize,     {.v = "0x 0y 25w 0h" } },
 	{ MODKEY|ShiftMask,             XK_Left,   moveresize,     {.v = "0x 0y -25w 0h" } },
-	{ MODKEY|ControlMask,           XK_Up,     moveresizeedge, {.v = "t"} },
+  // 位置
+  { MODKEY|ControlMask,           XK_Up,     moveresizeedge, {.v = "t"} },
 	{ MODKEY|ControlMask,           XK_Down,   moveresizeedge, {.v = "b"} },
 	{ MODKEY|ControlMask,           XK_Left,   moveresizeedge, {.v = "l"} },
 	{ MODKEY|ControlMask,           XK_Right,  moveresizeedge, {.v = "r"} },
-	{ MODKEY|ControlMask|ShiftMask, XK_Up,     moveresizeedge, {.v = "T"} },
+	// 放大
+  { MODKEY|ControlMask|ShiftMask, XK_Up,     moveresizeedge, {.v = "T"} },
 	{ MODKEY|ControlMask|ShiftMask, XK_Down,   moveresizeedge, {.v = "B"} },
 	{ MODKEY|ControlMask|ShiftMask, XK_Left,   moveresizeedge, {.v = "L"} },
 	{ MODKEY|ControlMask|ShiftMask, XK_Right,  moveresizeedge, {.v = "R"} },

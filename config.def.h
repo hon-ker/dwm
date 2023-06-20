@@ -128,7 +128,7 @@ static const Key keys[] = {
   { MODKEY,                     XK_d,       spawn,            SHCMD("rofi -show drun") },
   { MODKEY,                     XK_c,       spawn,            SHCMD("google-chrome-stable") },
   { MODKEY,                     XK_Return,  spawn,            SHCMD("alacritty")},
-  { ControlMask|Mod1Mask,       XK_a,       spawn,            SHCMD("flameshot gui")},
+  { Mod1Mask,                   XK_a,       spawn,            SHCMD("flameshot gui")},
   
   // kill窗口
   { MODKEY,                     XK_q,       killclient,     {0} },
