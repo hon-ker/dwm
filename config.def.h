@@ -120,6 +120,7 @@ static const char *scratchpadcmd[] = { "alacritty", "-T", scratchpadname, "-o","
 static const Key keys[] = {
   /* modifier                     key        function        argument */
   // 系统级 亮度，音量等
+  {ControlMask,                 XK_F1,      spawn,            SHCMD("~/.dwm/script/setVol.sh none")},
   {ControlMask,                 XK_F2,      spawn,            SHCMD("~/.dwm/script/setVol.sh down")},
   {ControlMask,                 XK_F3,      spawn,            SHCMD("~/.dwm/script/setVol.sh up")},
   {ControlMask,                 XK_F6,      spawn,            SHCMD("~/.dwm/script/setBacklight.sh down")},
