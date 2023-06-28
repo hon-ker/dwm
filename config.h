@@ -80,8 +80,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{"Gimp",                 NULL,                 NULL,       0,            1,           -1 },
+  {"chrome",               NULL,                 NULL,             1 << 2,       0,             -1}, // chrome     tag -> 
+  {"Chromium",             NULL,                 NULL,             1 << 2,       0,             -1}, // Chromium   tag -> 
+  {"Vmware",               NULL,                 NULL,             1 << 5,       0,             -1}, // Chromium   tag -> 
 };
 
 /* layout(s) */
@@ -130,6 +132,7 @@ static const Key keys[] = {
   { MODKEY,                     XK_c,       spawn,            SHCMD("google-chrome-stable") },
   { MODKEY,                     XK_Return,  spawn,            SHCMD("alacritty")},
   { Mod1Mask,                   XK_a,       spawn,            SHCMD("flameshot gui")},
+  { MODKEY,                     XK_w,       spawn,            SHCMD("nohup vmware -X ~/vm/win10/win10.vmx >/dev/null 2>&1 &")},
   
   // kill窗口
   { MODKEY,                     XK_q,       killclient,     {0} },
